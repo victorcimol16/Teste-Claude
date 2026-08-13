@@ -13,6 +13,12 @@ open index.html          # macOS
 xdg-open index.html      # Linux
 ```
 
+Para uma versão de arquivo único, que abre offline com um duplo clique e não depende da pasta `assets/`:
+
+```bash
+npm run build            # gera dist/index.html
+```
+
 Ou servir localmente (habilita também a correção por IA):
 
 ```bash
@@ -63,6 +69,7 @@ assets/js/temas.js         banco de temas e repertórios
 assets/js/corretor.js      motor de correção das 5 competências
 assets/js/app.js           interface, histórico e chamadas à API
 server/server.js           servidor estático + /api/corrigir
+build-standalone.js        gera a versão de arquivo único em dist/
 test/corretor.test.js      testes do motor
 ```
 

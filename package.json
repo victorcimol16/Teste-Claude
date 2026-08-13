@@ -5,6 +5,7 @@
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
+    "build": "node build-standalone.js",
     "test": "node test/corretor.test.js"
   },
   "keywords": ["enem", "redacao", "correcao", "educacao"],
