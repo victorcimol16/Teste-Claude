@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corretor de Redação ENEM</title>
+  <meta name="description" content="Corretor de redações do ENEM pelas 5 competências, com nota de 0 a 1000, apontamentos por trecho e banco de temas.">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+</head>
+<body>
+
+<header class="topo">
+  <div class="container topo-inner">
+    <div class="marca">
+      <span class="marca-icone">📝</span>
+      <div>
+        <h1>Corretor de Redação ENEM</h1>
+        <p>Avaliação pelas 5 competências &middot; nota de 0 a 1000</p>
+      </div>
+    </div>
+    <div class="topo-acoes">
+      <span id="statusIa" class="badge badge-off" title="Correção por IA">IA: verificando…</span>
+      <button id="btnTema" class="btn-icone" title="Alternar tema claro/escuro" aria-label="Alternar tema">🌙</button>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- ETAPA 1: proposta -->
+  <section class="cartao">
+    <h2 class="cartao-titulo"><span class="passo">1</span> Escolha a proposta</h2>
+
+    <div class="campo">
+      <label for="seletorTema">Tema</label>
+      <select id="seletorTema"></select>
+    </div>
+
+    <div class="campo" id="campoTemaCustom" hidden>
+      <label for="temaCustom">Enunciado do seu tema</label>
+      <input type="text" id="temaCustom" placeholder="Ex.: Caminhos para reduzir a desigualdade digital no Brasil">
+      <small>As palavras-chave são extraídas automaticamente do enunciado.</small>
+    </div>
+
+    <div class="proposta" id="propostaBox">
+      <p class="proposta-enunciado" id="propostaEnunciado"></p>
+      <details class="repertorios" id="repertoriosBox">
+        <summary>Repertórios sugeridos para este tema</summary>
+        <ul id="listaRepertorios"></ul>
+      </details>
+    </div>
+
+    <button id="btnSortear" class="btn btn-secundario">🎲 Sortear outro tema</button>
+  </section>
+
+  <!-- ETAPA 2: redação -->
+  <section class="cartao">
+    <h2 class="cartao-titulo"><span class="passo">2</span> Escreva sua redação</h2>
+
+    <textarea id="redacao" spellcheck="true"
+      placeholder="Digite ou cole sua redação aqui.&#10;&#10;Separe os parágrafos com uma linha em branco. A estrutura esperada é: introdução com tese, dois parágrafos de desenvolvimento e conclusão com proposta de intervenção."></textarea>
+
+    <div class="metricas" id="metricas">
+      <div class="metrica"><strong id="mPalavras">0</strong><span>palavras</span></div>
+      <div class="metrica"><strong id="mLinhas">0</strong><span>linhas / 30</span></div>
+      <div class="metrica"><strong id="mParagrafos">0</strong><span>parágrafos</span></div>
+      <div class="metrica"><strong id="mPeriodos">0</strong><span>períodos</span></div>
+    </div>
+    <div class="barra-linhas"><div class="barra-linhas-fill" id="barraLinhas"></div></div>
+
+    <div class="acoes">
+      <button id="btnCorrigir" class="btn btn-primario">Corrigir redação</button>
+      <button id="btnCorrigirIa" class="btn btn-ia" hidden>✨ Corrigir com IA</button>
+      <button id="btnExemplo" class="btn btn-secundario">Carregar exemplo</button>
+      <button id="btnLimpar" class="btn btn-fantasma">Limpar</button>
+    </div>
+  </section>
+
+  <!-- ETAPA 3: resultado -->
+  <section id="resultado" hidden>
+
+    <div class="cartao painel-nota">
+      <div class="nota-final">
+        <div class="nota-anel" id="notaAnel">
+          <span class="nota-valor" id="notaTotal">0</span>
+          <span class="nota-max">/ 1000</span>
+        </div>
+        <div class="nota-texto">
+          <h2 id="notaRotulo">Resultado</h2>
+          <p id="notaComentario"></p>
+        </div>
+      </div>
+      <div id="avisos" class="avisos"></div>
+      <div class="acoes acoes-resultado">
+        <button id="btnSalvar" class="btn btn-secundario">💾 Salvar no histórico</button>
+        <button id="btnImprimir" class="btn btn-fantasma">🖨️ Imprimir / PDF</button>
+      </div>
+    </div>
+
+    <div class="grade-competencias" id="competencias"></div>
+
+    <div class="cartao">
+      <h2 class="cartao-titulo">Texto com apontamentos</h2>
+      <p class="ajuda">Trechos destacados foram sinalizados pela análise da Competência 1. Passe o cursor para ver o motivo.</p>
+      <div class="texto-marcado" id="textoMarcado"></div>
+    </div>
+
+  </section>
+
+  <!-- HISTÓRICO -->
+  <section class="cartao" id="secaoHistorico" hidden>
+    <h2 class="cartao-titulo">Histórico</h2>
+    <div id="listaHistorico" class="historico"></div>
+    <button id="btnLimparHistorico" class="btn btn-fantasma">Apagar histórico</button>
+  </section>
+
+</main>
+
+<footer class="rodape">
+  <div class="container">
+    <p><strong>Como a nota é calculada:</strong> cada competência vale de 0 a 200 pontos, em níveis de 40 em 40, seguindo a matriz de referência do ENEM.</p>
+    <p class="aviso-legal">Esta é uma ferramenta de estudo com análise automática por heurísticas linguísticas (e, opcionalmente, por IA). O resultado é um diagnóstico orientativo e não reproduz a avaliação oficial do Inep.</p>
+  </div>
+</footer>
+
+<script src="assets/js/temas.js"></script>
+<script src="assets/js/corretor.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

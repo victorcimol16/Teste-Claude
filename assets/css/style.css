@@ -1,0 +1,419 @@
+/* ==========================================================================
+   Corretor de Redação ENEM — folha de estilo
+   ========================================================================== */
+
+:root {
+  --bg: #f5f7fa;
+  --superficie: #ffffff;
+  --superficie-2: #f0f3f8;
+  --borda: #dfe5ee;
+  --texto: #16202e;
+  --texto-suave: #5b6879;
+  --primaria: #1b6b4f;
+  --primaria-forte: #14523c;
+  --primaria-suave: #e6f2ec;
+  --destaque: #b4790a;
+  --erro: #c0392b;
+  --erro-suave: #fdecea;
+  --sucesso: #1e8449;
+  --ia: #5b4bd6;
+  --sombra: 0 1px 2px rgba(16, 27, 43, .06), 0 8px 24px rgba(16, 27, 43, .06);
+  --raio: 14px;
+}
+
+[data-tema="escuro"] {
+  --bg: #0f151d;
+  --superficie: #17202b;
+  --superficie-2: #1d2733;
+  --borda: #2b3846;
+  --texto: #e7edf5;
+  --texto-suave: #9bacbf;
+  --primaria: #3ea884;
+  --primaria-forte: #55c79f;
+  --primaria-suave: #16302a;
+  --destaque: #e0a83c;
+  --erro: #ef8378;
+  --erro-suave: #33211f;
+  --sucesso: #4ec98a;
+  --ia: #9b8ffb;
+  --sombra: 0 1px 2px rgba(0, 0, 0, .3), 0 10px 28px rgba(0, 0, 0, .25);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--texto);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { width: min(1080px, 100% - 2.5rem); margin-inline: auto; }
+
+/* O cabeçalho é fixo: reserva espaço para ele ao rolar até o resultado. */
+#resultado, #secaoHistorico { scroll-margin-top: 90px; }
+
+/* ---------- Topo ---------- */
+
+.topo {
+  background: var(--superficie);
+  border-bottom: 1px solid var(--borda);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.topo-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .9rem 0;
+}
+
+.marca { display: flex; align-items: center; gap: .8rem; }
+.marca-icone { font-size: 1.9rem; line-height: 1; }
+.marca h1 { font-size: 1.15rem; margin: 0; letter-spacing: -.01em; }
+.marca p { margin: 0; font-size: .82rem; color: var(--texto-suave); }
+
+.topo-acoes { display: flex; align-items: center; gap: .6rem; }
+
+.badge {
+  font-size: .72rem;
+  padding: .25rem .6rem;
+  border-radius: 999px;
+  border: 1px solid var(--borda);
+  color: var(--texto-suave);
+  white-space: nowrap;
+}
+.badge-on { color: var(--ia); border-color: var(--ia); background: color-mix(in srgb, var(--ia) 10%, transparent); }
+
+.btn-icone {
+  background: var(--superficie-2);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  width: 38px; height: 38px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--texto);
+}
+.btn-icone:hover { border-color: var(--primaria); }
+
+/* ---------- Cartões ---------- */
+
+main { padding: 1.5rem 0 3rem; }
+
+.cartao {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--sombra);
+}
+
+.cartao-titulo {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: 1.05rem;
+  margin: 0 0 1rem;
+}
+
+.passo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--primaria);
+  color: #fff;
+  font-size: .82rem;
+  font-weight: 700;
+  flex: none;
+}
+
+.ajuda { color: var(--texto-suave); font-size: .87rem; margin: -.5rem 0 1rem; }
+
+/* ---------- Formulário ---------- */
+
+.campo { margin-bottom: 1rem; }
+.campo label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: .35rem; }
+.campo small { display: block; color: var(--texto-suave); font-size: .8rem; margin-top: .3rem; }
+
+select, input[type="text"], textarea {
+  width: 100%;
+  padding: .7rem .8rem;
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  background: var(--superficie-2);
+  color: var(--texto);
+  font-family: inherit;
+  font-size: .95rem;
+}
+select:focus, input:focus, textarea:focus {
+  outline: 2px solid color-mix(in srgb, var(--primaria) 45%, transparent);
+  outline-offset: 1px;
+  border-color: var(--primaria);
+}
+
+textarea {
+  min-height: 340px;
+  resize: vertical;
+  line-height: 1.75;
+  font-size: 1rem;
+}
+
+.proposta {
+  background: var(--primaria-suave);
+  border-left: 4px solid var(--primaria);
+  border-radius: 8px;
+  padding: .9rem 1rem;
+  margin: 1rem 0;
+}
+.proposta-enunciado { margin: 0; font-weight: 600; }
+.repertorios { margin-top: .6rem; }
+.repertorios summary { cursor: pointer; font-size: .85rem; color: var(--texto-suave); }
+.repertorios ul { margin: .5rem 0 0; padding-left: 1.2rem; font-size: .88rem; }
+.repertorios li { margin-bottom: .3rem; }
+
+/* ---------- Métricas ---------- */
+
+.metricas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: .6rem;
+  margin-top: 1rem;
+}
+.metrica {
+  background: var(--superficie-2);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: .6rem;
+  text-align: center;
+}
+.metrica strong { display: block; font-size: 1.25rem; line-height: 1.2; }
+.metrica span { font-size: .74rem; color: var(--texto-suave); }
+
+.barra-linhas {
+  height: 6px;
+  background: var(--superficie-2);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: .6rem;
+  border: 1px solid var(--borda);
+}
+.barra-linhas-fill {
+  height: 100%;
+  width: 0;
+  background: var(--primaria);
+  transition: width .2s ease, background .2s ease;
+}
+.barra-linhas-fill.excedido { background: var(--erro); }
+
+/* ---------- Botões ---------- */
+
+.acoes { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.1rem; }
+
+.btn {
+  padding: .7rem 1.15rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-size: .92rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform .06s ease, filter .15s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: .55; cursor: progress; }
+
+.btn-primario { background: var(--primaria); color: #fff; }
+.btn-primario:hover:not(:disabled) { background: var(--primaria-forte); }
+
+.btn-ia { background: var(--ia); color: #fff; }
+.btn-ia:hover:not(:disabled) { filter: brightness(1.08); }
+
+.btn-secundario { background: var(--superficie-2); color: var(--texto); border-color: var(--borda); }
+.btn-secundario:hover { border-color: var(--primaria); }
+
+.btn-fantasma { background: transparent; color: var(--texto-suave); border-color: var(--borda); }
+.btn-fantasma:hover { color: var(--texto); }
+
+/* ---------- Nota final ---------- */
+
+.painel-nota { padding-bottom: 1.2rem; }
+
+.nota-final { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+
+.nota-anel {
+  --pct: 0;
+  width: 132px; height: 132px;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  flex: none;
+  background: conic-gradient(var(--primaria) calc(var(--pct) * 1%), var(--superficie-2) 0);
+  position: relative;
+}
+.nota-anel::after {
+  content: "";
+  position: absolute;
+  inset: 11px;
+  background: var(--superficie);
+  border-radius: 50%;
+}
+.nota-valor, .nota-max { position: relative; z-index: 1; display: block; }
+.nota-valor { font-size: 2.3rem; font-weight: 800; line-height: 1; letter-spacing: -.02em; }
+.nota-max { font-size: .78rem; color: var(--texto-suave); }
+
+.nota-texto h2 { margin: 0 0 .25rem; font-size: 1.3rem; }
+.nota-texto p { margin: 0; color: var(--texto-suave); max-width: 52ch; }
+
+.avisos { margin-top: 1.1rem; display: grid; gap: .5rem; }
+.aviso {
+  background: var(--erro-suave);
+  border-left: 3px solid var(--destaque);
+  padding: .6rem .8rem;
+  border-radius: 6px;
+  font-size: .88rem;
+}
+.acoes-resultado { margin-top: 1.2rem; }
+
+/* ---------- Competências ---------- */
+
+.grade-competencias { display: grid; gap: 1rem; margin-bottom: 1.25rem; }
+
+.comp {
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 1.25rem;
+  box-shadow: var(--sombra);
+}
+
+.comp-cabecalho { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.comp-titulo { margin: 0; font-size: 1rem; }
+.comp-titulo span { color: var(--texto-suave); font-weight: 500; }
+.comp-descricao { margin: .3rem 0 0; font-size: .84rem; color: var(--texto-suave); max-width: 60ch; }
+
+.comp-nota { text-align: right; flex: none; }
+.comp-nota strong { display: block; font-size: 1.6rem; line-height: 1; }
+.comp-nota span { font-size: .74rem; color: var(--texto-suave); }
+
+.comp-barra {
+  height: 8px;
+  background: var(--superficie-2);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: .9rem 0 1rem;
+}
+.comp-barra div { height: 100%; border-radius: 999px; transition: width .35s ease; }
+
+.nivel-5 { background: var(--sucesso); }
+.nivel-4 { background: var(--primaria); }
+.nivel-3 { background: var(--destaque); }
+.nivel-2 { background: #d97706; }
+.nivel-1, .nivel-0 { background: var(--erro); }
+
+.lista-itens { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; }
+.lista-itens li {
+  display: flex;
+  gap: .55rem;
+  font-size: .89rem;
+  padding: .55rem .7rem;
+  border-radius: 8px;
+  background: var(--superficie-2);
+}
+.item-ok { border-left: 3px solid var(--sucesso); }
+.item-erro { border-left: 3px solid var(--erro); }
+.item-corpo strong { display: block; font-size: .82rem; }
+.item-trecho {
+  display: block;
+  margin-top: .3rem;
+  font-style: italic;
+  color: var(--texto-suave);
+  font-size: .82rem;
+  border-left: 2px solid var(--borda);
+  padding-left: .5rem;
+}
+
+.subtitulo {
+  font-size: .75rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--texto-suave);
+  margin: 1rem 0 .5rem;
+  font-weight: 700;
+}
+
+/* ---------- Texto marcado ---------- */
+
+.texto-marcado {
+  background: var(--superficie-2);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 1.1rem 1.2rem;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  font-size: .95rem;
+}
+.marca-erro {
+  background: color-mix(in srgb, var(--erro) 22%, transparent);
+  border-bottom: 2px solid var(--erro);
+  border-radius: 3px;
+  cursor: help;
+}
+
+/* ---------- Histórico ---------- */
+
+.historico { display: grid; gap: .6rem; margin-bottom: 1rem; }
+.hist-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  background: var(--superficie-2);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: .7rem .9rem;
+  font-size: .88rem;
+}
+.hist-item b { font-size: 1.05rem; }
+.hist-tema { color: var(--texto-suave); font-size: .8rem; }
+.hist-acoes { display: flex; gap: .4rem; flex: none; }
+
+/* ---------- Rodapé ---------- */
+
+.rodape {
+  border-top: 1px solid var(--borda);
+  background: var(--superficie);
+  padding: 1.5rem 0;
+  font-size: .85rem;
+  color: var(--texto-suave);
+}
+.rodape p { margin: 0 0 .5rem; }
+.aviso-legal { font-size: .8rem; opacity: .85; }
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 640px) {
+  .metricas { grid-template-columns: repeat(2, 1fr); }
+  .marca h1 { font-size: 1rem; }
+  .marca p { display: none; }
+  .nota-final { gap: 1rem; }
+  .comp-cabecalho { flex-direction: column; }
+  .comp-nota { text-align: left; }
+}
+
+/* ---------- Impressão ---------- */
+
+@media print {
+  .topo, .rodape, .acoes, #secaoHistorico, textarea, .btn { display: none !important; }
+  .cartao, .comp { box-shadow: none; border-color: #ccc; break-inside: avoid; }
+  body { background: #fff; }
+}

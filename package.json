@@ -1,0 +1,19 @@
+{
+  "name": "corretor-redacao-enem",
+  "version": "1.0.0",
+  "description": "Site de correção de redações do ENEM pelas 5 competências, com análise local e correção opcional por IA.",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "node test/corretor.test.js"
+  },
+  "keywords": ["enem", "redacao", "correcao", "educacao"],
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.70.0"
+  }
+}
